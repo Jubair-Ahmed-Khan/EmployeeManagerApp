@@ -1,3 +1,6 @@
+using EmployeeManagerApp.Services;
+using Microsoft.EntityFrameworkCore;
+
 namespace EmployeeManagerApp
 {
     public class Program
@@ -5,6 +8,11 @@ namespace EmployeeManagerApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<EmployeeDbContext>
+           (
+               options => options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres"))
+           );
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
