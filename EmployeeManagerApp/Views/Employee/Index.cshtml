@@ -1,6 +1,8 @@
 ﻿@model List<Employee>
 
-
+﻿@{
+    ViewData["Title"] = "Employees";
+}
 
 
 <div class="container my-3">
@@ -21,7 +23,7 @@
             {
                 <tr>
                     <td>
-                        @employee.ImageFileName
+                        <img src="/profiles/@employee.ImageFileName" width="70"/>
                     </td>
                     <td>
                         @employee.FullName
