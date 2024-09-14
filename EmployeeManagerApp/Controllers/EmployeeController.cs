@@ -137,5 +137,25 @@ namespace EmployeeManagerApp.Controllers
 
             return RedirectToAction("Index", "Employee");
         }
+
+        public IActionResult Delete(int id)
+        {
+            var employee = _context.Employees.Find(id);
+
+            if(employee == null)
+            {
+                return RedirectToAction("Index", "Employee");
+            }
+
+
+
+            string imageFullPath = _environment.WebRootPath + "/profiles/" + employee.ImageFileName;
+            System.IO.File.Delete(imageFullPath);
+
+            _context.Employees.Remove(employee);
+            _context.SaveChanges(true);
+
+            return RedirectToAction("Index", "Employee"); 
+        }
     }
 }
