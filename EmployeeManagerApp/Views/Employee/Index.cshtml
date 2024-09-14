@@ -1,6 +1,7 @@
 ﻿@model List<Employee>
-@{
-}
+
+
+
 
 <div class="container my-3">
     <h2>List of Employee</h2>
@@ -31,8 +32,22 @@
                     <td>
                         @employee.Mobile
                     </td>
+                    
                     <td>
-                        @employee.DateOfBirth
+                        @{
+                            DateTime dob;
+                            bool isValidDate = DateTime.TryParseExact(employee.DateOfBirth, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out dob);
+                        }
+
+                        @if (isValidDate)
+                        {
+                            @dob.ToString("dd-MM-yyyy")
+                        }
+                        else
+                        {
+                            @employee.DateOfBirth  <!-- Fallback to original format if parsing fails -->
+                        }
+                        
                     </td>
 
                     <td class="text-center">
