@@ -17,7 +17,8 @@ namespace EmployeeManagerApp.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FullName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    FirstName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Mobile = table.Column<string>(type: "text", nullable: false),
                     DateOfBirth = table.Column<string>(type: "text", nullable: false),

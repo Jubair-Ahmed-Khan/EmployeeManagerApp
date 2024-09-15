@@ -1,6 +1,8 @@
 ﻿using EmployeeManagerApp.Models;
 using EmployeeManagerApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Drawing.Printing;
 
 namespace EmployeeManagerApp.Controllers
 {
@@ -14,10 +16,15 @@ namespace EmployeeManagerApp.Controllers
             _context = context;
             _environment = environment;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? pageNumber,int pageSize=10)
         {
-            var employees = _context.Employees.ToList();
-            return View(employees);
+            var employees = _context.Employees;
+            //return View(employees);
+
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalCount = _context.Employees.Count();
+
+            return View(await Pagination<Employee>.CreateAsync(employees.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public IActionResult Create()
@@ -52,7 +59,8 @@ namespace EmployeeManagerApp.Controllers
 
             Employee employee = new Employee()
             {
-                FullName = employeeDto.FullName,
+                FirstName = employeeDto.FirstName,
+                LastName = employeeDto.LastName,
                 Email= employeeDto.Email,
                 Mobile = employeeDto.Mobile,
                 DateOfBirth = employeeDto.DateOfBirth,
@@ -78,7 +86,8 @@ namespace EmployeeManagerApp.Controllers
 
             var employeeDto = new EmployeeDto()
             {
-                FullName = employee.FullName,
+                FirstName = employee.FirstName,
+                LastName = employee.LastName,
                 Email = employee.Email,
                 Mobile = employee.Mobile,
                 DateOfBirth = employee.DateOfBirth
@@ -127,7 +136,8 @@ namespace EmployeeManagerApp.Controllers
                 System.IO.File.Delete(oldImageFullPath);
             }
 
-            employee.FullName = employeeDto.FullName;
+            employee.FirstName = employeeDto.FirstName;
+            employee.LastName = employeeDto.LastName;
             employee.Email = employeeDto.Email;
             employee.Mobile = employeeDto.Mobile;
             employee.DateOfBirth = employeeDto.DateOfBirth;
@@ -146,8 +156,6 @@ namespace EmployeeManagerApp.Controllers
             {
                 return RedirectToAction("Index", "Employee");
             }
-
-
 
             string imageFullPath = _environment.WebRootPath + "/profiles/" + employee.ImageFileName;
             System.IO.File.Delete(imageFullPath);

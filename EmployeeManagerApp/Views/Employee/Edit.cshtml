@@ -10,9 +10,14 @@
             <input class="form-control-plaintext" hidden value="@ViewData["EmployeeId"]" />
         </div>
         <div class="form-group mb-2">
-            <label asp-for="FullName" class="control-label">Full Name</label>
-            <input asp-for="FullName" class="form-control" />
-            <span asp-validation-for="FullName" class="text-danger"></span>
+            <label asp-for="FirstName" class="control-label">First Name</label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-2">
+            <label asp-for="LastName" class="control-label">Last Name</label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
         <div class="form-group mb-2">
             <label asp-for="Email" class="control-label">Email</label>

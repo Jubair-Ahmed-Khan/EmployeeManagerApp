@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EmployeeManagerApp.Migrations
 {
     [DbContext(typeof(EmployeeDbContext))]
-    [Migration("20240914161920_Initial")]
+    [Migration("20240915060009_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -40,7 +40,7 @@ namespace EmployeeManagerApp.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
@@ -48,6 +48,11 @@ namespace EmployeeManagerApp.Migrations
                     b.Property<string>("ImageFileName")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Mobile")
                         .IsRequired()

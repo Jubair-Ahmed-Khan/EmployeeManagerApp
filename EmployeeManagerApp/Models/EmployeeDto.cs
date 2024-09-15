@@ -6,7 +6,10 @@ namespace EmployeeManagerApp.Models
     {
         [Required]
         [MaxLength(100)]
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string LastName { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]
